@@ -73,10 +73,42 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotosGridViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
+    NSLog(@"im in loading cell %li", (long)indexPath.row);
     // Configure the cell
+    NSURL *baseURL = [NSURL URLWithString:[self generateURLString]];
+    [[cell imageView] sd_setImageWithURL:(baseURL) completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        CGSize size = [self decideSize: image];
+        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, size.width, size.height);
+        cell.imageView.hidden = false;
+        cell.activityIndicator.hidden = true;
+//        NSLog(@"\nImageSize: (%f, %f)", image.size.width, image.size.height);
+//        NSLog(@"\nCellSize: (%f, %f)", size.width, size.height);
+    }];
     return cell;
 }
+
+-(NSString *) generateURLString {
+    int width = 250 + arc4random_uniform(600);
+    int height = 300 + arc4random_uniform(600);
+    return [NSString stringWithFormat:@"http://lorempixel.com/%i/%i/", width, height];
+}
+
+-(CGSize) decideSize: (UIImage *)image {
+    CGSize s;
+    int minWidth = (self.view.frame.size.width - 200) / 2;
+    s.width = MIN(minWidth, image.size.width);
+    if (s.width != image.size.width) {
+        s.height = (image.size.height * s.width) / image.size.width;
+    }
+    return s;
+    
+}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Make cell same width as application frame and 250 pixels tall.
+//    NSLog(@"im in size for cell %li", (long)indexPath.row);
+//    return CGSizeMake(self.view.frame.size.width, 250);
+//}
 
 #pragma mark <UICollectionViewDelegate>
 
