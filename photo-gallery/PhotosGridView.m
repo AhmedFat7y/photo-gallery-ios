@@ -103,7 +103,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     ImageModel *model = [DataWrapper ImageModelAtIndex:indexPath];
     if (model.imageData != nil) {
-        return model.imageResize;
+        return [model getImageResize];
     } else {
         UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
         int minWidth = 0;
@@ -126,11 +126,6 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.collectionView performBatchUpdates:nil completion:nil];
-}
-
 
 #pragma mark <UICollectionViewDelegate>
 
@@ -140,6 +135,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	return YES;
 }
 */
+
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+ {
+     [self.collectionView.collectionViewLayout invalidateLayout];
+ }
 
 /*
 // Uncomment this method to specify if the specified item should be selected
