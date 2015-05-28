@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="314"/>
                 <subviews>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vGk-W6-7Fh">
-                        <rect key="frame" x="5" y="5" width="290" height="304"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="314"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="290" id="BkQ-XC-2SA"/>
                             <constraint firstAttribute="height" constant="304" id="IIt-DQ-EFC"/>
@@ -33,22 +33,14 @@
             </view>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="vGk-W6-7Fh" secondAttribute="trailing" constant="5" id="3ar-wA-OHk"/>
-                <constraint firstAttribute="bottom" secondItem="vGk-W6-7Fh" secondAttribute="bottom" constant="5" id="A32-hb-mZh"/>
+                <constraint firstAttribute="trailing" secondItem="vGk-W6-7Fh" secondAttribute="trailing" id="BuU-5O-1T8"/>
+                <constraint firstItem="vGk-W6-7Fh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KJZ-FL-mRV"/>
                 <constraint firstAttribute="centerY" secondItem="qfV-VT-pdK" secondAttribute="centerY" id="ZxP-EK-xhz"/>
-                <constraint firstItem="vGk-W6-7Fh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="dbm-iK-MLg"/>
-                <constraint firstItem="vGk-W6-7Fh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="deB-cu-Ofb"/>
                 <constraint firstAttribute="centerX" secondItem="qfV-VT-pdK" secondAttribute="centerX" id="hhK-4n-eFc"/>
-                <constraint firstAttribute="trailing" secondItem="vGk-W6-7Fh" secondAttribute="trailing" constant="5" id="joI-bJ-VWu"/>
-                <constraint firstAttribute="bottom" secondItem="vGk-W6-7Fh" secondAttribute="bottom" constant="5" id="kcK-cH-PLg"/>
+                <constraint firstItem="vGk-W6-7Fh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tuD-3L-8TF"/>
+                <constraint firstAttribute="bottom" secondItem="vGk-W6-7Fh" secondAttribute="bottom" id="zC9-Ig-lu9"/>
             </constraints>
             <size key="customSize" width="300" height="314"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="3ar-wA-OHk"/>
-                    <exclude reference="kcK-cH-PLg"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="activityIndicator" destination="qfV-VT-pdK" id="t0r-iO-hUP"/>
                 <outlet property="imageView" destination="vGk-W6-7Fh" id="YTR-zF-JN1"/>

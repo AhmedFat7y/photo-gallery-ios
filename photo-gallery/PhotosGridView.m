@@ -35,12 +35,14 @@ static NSString * const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
--(PhotosGridView *)init {
++(PhotosGridView *)init {
     NSLog(@"initalizin photos grid view");
-    self.aFlowLayout = [[CustomFlowLayout alloc] init];
-    [self.aFlowLayout setItemSize:CGSizeMake(100, 140)];
-    [self.aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    return [super initWithCollectionViewLayout:self.aFlowLayout];
+    CustomFlowLayout* aFlowLayout = [[CustomFlowLayout alloc] init];
+    aFlowLayout.minimumInteritemSpacing = 0;
+    aFlowLayout.minimumLineSpacing = 1;
+    [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    PhotosGridView* temp = [[PhotosGridView alloc] initWithCollectionViewLayout:aFlowLayout];
+    return temp;
 }
 
 /*
@@ -81,11 +83,11 @@ static NSString * const reuseIdentifier = @"Cell";
             //        CGSize size = [self decideSize: image];
             //        cell.imageView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, size.width, size.height);
             model.imageData = image;
-            model.imageResize = [self decideSize:cell.imageView.image];
+            [model updateResizeImage];
             cell.activityIndicator.hidden = true;
             cell.imageView.hidden = false;
             NSLog(@"loaded image: %li", (long)indexPath.row);
-            [[self aFlowLayout] invalidateLayout];
+            //[[self aFlowLayout] invalidateLayout];
         }];
     } else {
         cell.imageView.image = model.imageData;
@@ -103,19 +105,15 @@ static NSString * const reuseIdentifier = @"Cell";
     if (model.imageData != nil) {
         return model.imageResize;
     } else {
-        return CGSizeMake(100, 140);
+        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+        int minWidth = 0;
+        if(UIDeviceOrientationIsPortrait(orientation)) {
+            minWidth = (self.collectionView.frame.size.width) / 2;
+        } else {
+            minWidth = (self.collectionView.frame.size.width) / 3;
+        }
+        return CGSizeMake(minWidth, minWidth);
     }
-}
-
-
--(CGSize) decideSize: (UIImage *)image {
-    CGSize s;
-    int minWidth = (self.collectionView.frame.size.width - 200) / 2;
-    s.width = MIN(minWidth, image.size.width);
-    if (s.width != image.size.width) {
-        s.height = (image.size.height * s.width) / image.size.width;
-    }
-    return s;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -128,12 +126,11 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Make cell same width as application frame and 250 pixels tall.
-//    NSLog(@"im in size for cell %li", (long)indexPath.row);
-//    return CGSizeMake(self.view.frame.size.width, 250);
-//}
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.collectionView performBatchUpdates:nil completion:nil];
+}
+
 
 #pragma mark <UICollectionViewDelegate>
 

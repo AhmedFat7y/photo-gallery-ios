@@ -19,8 +19,9 @@
 
 - (id) init {
     
-    CustomFlowLayout * temp = [super init];
-    return temp;
+    self = [super init];
+    self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    return self;
 }
 
 - (void)prepareLayout {

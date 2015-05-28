@@ -23,7 +23,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self presentViewController:[[PhotosGridView alloc] init] animated:YES completion:nil];
+    [self presentViewController:[PhotosGridView init] animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

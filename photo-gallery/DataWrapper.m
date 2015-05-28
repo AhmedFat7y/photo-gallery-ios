@@ -32,7 +32,7 @@
 -(void) addImages:(NSInteger) count {
     for(int i =0;i < count; i++) {
         NSURL *baseURL = [NSURL URLWithString:[DataWrapper generateURLString]];
-        ImageModel* model = [[ImageModel alloc] initWithImage:nil imageUrl:baseURL imageResize:CGSizeZero];
+        ImageModel* model = [[ImageModel alloc] initWithImage:baseURL];
         [[self imagesArray] addObject: model];
     }
 }

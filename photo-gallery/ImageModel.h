@@ -16,11 +16,12 @@
 @property (nonatomic) NSURL* imageUrl;
 @property (nonatomic) UIImage* imageData;
 @property (nonatomic) CGSize imageResize;
+@property (nonatomic) bool isPortrait;
 
--(id)initWithImage: (UIImage*)imageData
-          imageUrl: (NSURL*)imageUrl
-       imageResize: (CGSize) imageResize;
+-(id)initWithImage: (NSURL*)imageUrl;
+-(void) updateResizeImage;
+-(CGSize) getImageResize;
+
 
 @end
-
 #endif
