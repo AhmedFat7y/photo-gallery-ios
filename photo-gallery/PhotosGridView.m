@@ -8,10 +8,11 @@
 
 #import "PhotosGridView.h"
 #import "PhotosGridViewCell.h"
+#import "CustomFlowLayout.h"
+#import "ImageModel.h"
 
 
 @interface PhotosGridView ()
-
 @end
 
 @implementation PhotosGridView
@@ -20,17 +21,13 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    
     UINib *nibForTheCell = [UINib nibWithNibName:@"PhotosGridViewCell" bundle:nil];
     [self.collectionView registerNib:nibForTheCell forCellWithReuseIdentifier:reuseIdentifier];
+    self.collectionView.delegate = self;
     
-    // Register cell classes
-    //[self.collectionView registerClass:[PhotosGridViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
+    self.dataWrapper = [[DataWrapper alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,10 +37,10 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(PhotosGridView *)init {
     NSLog(@"initalizin photos grid view");
-    UICollectionViewFlowLayout *aFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [aFlowLayout setItemSize:CGSizeMake(150, 140)];
-    [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    return [super initWithCollectionViewLayout:aFlowLayout];
+    self.aFlowLayout = [[CustomFlowLayout alloc] init];
+    [self.aFlowLayout setItemSize:CGSizeMake(100, 140)];
+    [self.aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    return [super initWithCollectionViewLayout:self.aFlowLayout];
 }
 
 /*
@@ -68,41 +65,69 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSLog(@"asking for number of items");
-    return 5;
+    return [DataWrapper count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotosGridViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSLog(@"im in loading cell %li", (long)indexPath.row);
     // Configure the cell
-    NSURL *baseURL = [NSURL URLWithString:[self generateURLString]];
-    [[cell imageView] sd_setImageWithURL:(baseURL) completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        CGSize size = [self decideSize: image];
-        cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, size.width, size.height);
+    ImageModel *model = [DataWrapper ImageModelAtIndex:indexPath];
+    if (model.imageData == nil)
+    {
+        NSLog(@"im in loading cell %li", (long)indexPath.row);
+        
+        NSURL *baseURL =  model.imageUrl;
+        [[cell imageView] sd_setImageWithURL:(baseURL) completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            //        CGSize size = [self decideSize: image];
+            //        cell.imageView.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, size.width, size.height);
+            model.imageData = image;
+            model.imageResize = [self decideSize:cell.imageView.image];
+            cell.activityIndicator.hidden = true;
+            cell.imageView.hidden = false;
+            NSLog(@"loaded image: %li", (long)indexPath.row);
+            [[self aFlowLayout] invalidateLayout];
+        }];
+    } else {
+        cell.imageView.image = model.imageData;
         cell.imageView.hidden = false;
         cell.activityIndicator.hidden = true;
-//        NSLog(@"\nImageSize: (%f, %f)", image.size.width, image.size.height);
-//        NSLog(@"\nCellSize: (%f, %f)", size.width, size.height);
-    }];
+        //[[self aFlowLayout] invalidateLayout];
+    }
     return cell;
 }
 
--(NSString *) generateURLString {
-    int width = 250 + arc4random_uniform(600);
-    int height = 300 + arc4random_uniform(600);
-    return [NSString stringWithFormat:@"http://lorempixel.com/%i/%i/", width, height];
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ImageModel *model = [DataWrapper ImageModelAtIndex:indexPath];
+    if (model.imageData != nil) {
+        return model.imageResize;
+    } else {
+        return CGSizeMake(100, 140);
+    }
 }
+
 
 -(CGSize) decideSize: (UIImage *)image {
     CGSize s;
-    int minWidth = (self.view.frame.size.width - 200) / 2;
+    int minWidth = (self.collectionView.frame.size.width - 200) / 2;
     s.width = MIN(minWidth, image.size.width);
     if (s.width != image.size.width) {
         s.height = (image.size.height * s.width) / image.size.width;
     }
     return s;
-    
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [super scrollViewDidScroll:scrollView];
+    float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
+    if (bottomEdge >= scrollView.contentSize.height) {
+        // we are at the end
+        [DataWrapper addImages:10];
+        [[self collectionView] reloadData];
+    }
+}
+
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    // Make cell same width as application frame and 250 pixels tall.

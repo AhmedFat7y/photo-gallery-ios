@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D021A7701B15E52800A45C79 /* WaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D021A76F1B15E52800A45C79 /* WaterFlowLayout.m */; };
+		D021A7731B15E53E00A45C79 /* CustomFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D021A7721B15E53E00A45C79 /* CustomFlowLayout.m */; };
+		D021A7771B15F16A00A45C79 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D021A7761B15F16A00A45C79 /* CHTCollectionViewWaterfallLayout.m */; };
+		D021A7791B16013F00A45C79 /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D021A7781B16013F00A45C79 /* ImageModel.m */; };
+		D0A44DC71B16FF80003D360E /* DataWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A44DC61B16FF80003D360E /* DataWrapper.m */; };
 		D0EC27F81B1332B200A1BDB8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC27F71B1332B200A1BDB8 /* main.m */; };
 		D0EC27FB1B1332B200A1BDB8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC27FA1B1332B200A1BDB8 /* AppDelegate.m */; };
 		D0EC27FE1B1332B200A1BDB8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC27FD1B1332B200A1BDB8 /* ViewController.m */; };
@@ -47,6 +52,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D021A76E1B15E52800A45C79 /* WaterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaterFlowLayout.h; path = ../WaterFlowLayout.h; sourceTree = "<group>"; };
+		D021A76F1B15E52800A45C79 /* WaterFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaterFlowLayout.m; path = ../WaterFlowLayout.m; sourceTree = "<group>"; };
+		D021A7711B15E53E00A45C79 /* CustomFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomFlowLayout.h; path = ../CustomFlowLayout.h; sourceTree = "<group>"; };
+		D021A7721B15E53E00A45C79 /* CustomFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomFlowLayout.m; path = ../CustomFlowLayout.m; sourceTree = "<group>"; };
+		D021A7751B15F16A00A45C79 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHTCollectionViewWaterfallLayout.h; path = ../CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		D021A7761B15F16A00A45C79 /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHTCollectionViewWaterfallLayout.m; path = ../CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		D021A7781B16013F00A45C79 /* ImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageModel.m; sourceTree = "<group>"; };
+		D021A77A1B16015700A45C79 /* ImageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModel.h; sourceTree = "<group>"; };
+		D0A44DC51B16FF80003D360E /* DataWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWrapper.h; sourceTree = "<group>"; };
+		D0A44DC61B16FF80003D360E /* DataWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataWrapper.m; sourceTree = "<group>"; };
 		D0EC27F21B1332B200A1BDB8 /* photo-gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "photo-gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0EC27F61B1332B200A1BDB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0EC27F71B1332B200A1BDB8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -119,6 +134,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D021A7741B15E54D00A45C79 /* layouts */ = {
+			isa = PBXGroup;
+			children = (
+				D021A7751B15F16A00A45C79 /* CHTCollectionViewWaterfallLayout.h */,
+				D021A7761B15F16A00A45C79 /* CHTCollectionViewWaterfallLayout.m */,
+				D021A7711B15E53E00A45C79 /* CustomFlowLayout.h */,
+				D021A7721B15E53E00A45C79 /* CustomFlowLayout.m */,
+				D021A76E1B15E52800A45C79 /* WaterFlowLayout.h */,
+				D021A76F1B15E52800A45C79 /* WaterFlowLayout.m */,
+			);
+			name = layouts;
+			sourceTree = "<group>";
+		};
+		D0A44DC41B16FF27003D360E /* model */ = {
+			isa = PBXGroup;
+			children = (
+				D021A7781B16013F00A45C79 /* ImageModel.m */,
+				D021A77A1B16015700A45C79 /* ImageModel.h */,
+				D0A44DC51B16FF80003D360E /* DataWrapper.h */,
+				D0A44DC61B16FF80003D360E /* DataWrapper.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		D0EC27E91B1332B100A1BDB8 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +180,7 @@
 		D0EC27F41B1332B200A1BDB8 /* photo-gallery */ = {
 			isa = PBXGroup;
 			children = (
+				D0A44DC41B16FF27003D360E /* model */,
 				D0EC27F91B1332B200A1BDB8 /* AppDelegate.h */,
 				D0EC27FA1B1332B200A1BDB8 /* AppDelegate.m */,
 				D0EC27FC1B1332B200A1BDB8 /* ViewController.h */,
@@ -183,6 +223,7 @@
 		D0EC281D1B1333AB00A1BDB8 /* gridview */ = {
 			isa = PBXGroup;
 			children = (
+				D021A7741B15E54D00A45C79 /* layouts */,
 				D0EC28381B133F5A00A1BDB8 /* PhotosGridView.h */,
 				D0EC28391B133F5A00A1BDB8 /* PhotosGridView.m */,
 				D0EC283A1B133F5A00A1BDB8 /* PhotosGridView.xib */,
@@ -348,14 +389,19 @@
 				D0EC286D1B13479800A1BDB8 /* UIImageView+WebCache.m in Sources */,
 				D0EC286B1B13479800A1BDB8 /* UIImage+WebP.m in Sources */,
 				D0EC28671B13479800A1BDB8 /* SDWebImagePrefetcher.m in Sources */,
+				D021A7791B16013F00A45C79 /* ImageModel.m in Sources */,
 				D0EC27FB1B1332B200A1BDB8 /* AppDelegate.m in Sources */,
 				D0EC28631B13479800A1BDB8 /* SDWebImageDecoder.m in Sources */,
+				D021A7771B15F16A00A45C79 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				D0EC28641B13479800A1BDB8 /* SDWebImageDownloader.m in Sources */,
 				D0EC282E1B13380400A1BDB8 /* PhotosGridViewCell.m in Sources */,
 				D0EC28661B13479800A1BDB8 /* SDWebImageManager.m in Sources */,
 				D0EC286E1B13479800A1BDB8 /* UIView+WebCacheOperation.m in Sources */,
 				D0EC28681B13479800A1BDB8 /* UIButton+WebCache.m in Sources */,
+				D021A7731B15E53E00A45C79 /* CustomFlowLayout.m in Sources */,
 				D0EC286A1B13479800A1BDB8 /* UIImage+MultiFormat.m in Sources */,
+				D021A7701B15E52800A45C79 /* WaterFlowLayout.m in Sources */,
+				D0A44DC71B16FF80003D360E /* DataWrapper.m in Sources */,
 				D0EC27F81B1332B200A1BDB8 /* main.m in Sources */,
 				D0EC28651B13479800A1BDB8 /* SDWebImageDownloaderOperation.m in Sources */,
 				D0EC28691B13479800A1BDB8 /* UIImage+GIF.m in Sources */,

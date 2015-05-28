@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotosGridView : UICollectionViewController
+#import "CustomFlowLayout.h"
+#import "DataWrapper.h"
+
+@interface PhotosGridView : UICollectionViewController<UIScrollViewDelegate, UICollectionViewDelegateFlowLayout>
+
+@property (nonatomic) DataWrapper* dataWrapper;
+@property (nonatomic) CustomFlowLayout* aFlowLayout;
 
 @end

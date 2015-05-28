@@ -13,5 +13,9 @@
 - (void)awakeFromNib {
     // Initialization code
 }
-
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.imageView.hidden = true;
+    self.activityIndicator.hidden = false;
+}
 @end
